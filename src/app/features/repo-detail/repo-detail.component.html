@@ -1,0 +1,44 @@
+<main class="repo-detail-container" role="main" aria-labelledby="repoName">
+  <!-- Estado de carregamento -->
+  <div *ngIf="loading" class="loading" role="status" aria-live="polite">
+    🔄 Carregando repositório...
+  </div>
+
+  <!-- Estado de erro -->
+  <div *ngIf="error" class="error" role="alert" aria-live="assertive">
+    {{ error }}
+  </div>
+
+  <!-- Detalhes do repositório -->
+  <div *ngIf="repo && !loading && !error" class="repo-card">
+    <h1 class="repo-name" id="repoName">{{ repo.name }}</h1>
+
+    <p *ngIf="repo.description" class="repo-description">
+      {{ repo.description }}
+    </p>
+
+    <div class="repo-meta">
+      <span aria-hidden="true">
+        ⭐ <strong>{{ repo.stargazers_count }}</strong> estrelas
+      </span>
+
+      <a
+        [href]="repo.html_url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="repo-link"
+        [attr.aria-label]="'Abrir repositório ' + repo.name + ' no GitHub'"
+      >
+        🔗 Ver no GitHub
+      </a>
+    </div>
+
+    <button
+      class="btn-back"
+      (click)="goBack()"
+      aria-label="Voltar para a lista de repositórios"
+    >
+      ⬅ Voltar aos repositórios
+    </button>
+  </div>
+</main>
