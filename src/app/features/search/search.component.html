@@ -1,0 +1,38 @@
+<main class="search-container">
+  <h1 class="title">Buscar usuário do GitHub</h1>
+
+  <form
+    (ngSubmit)="search()"
+    #searchForm="ngForm"
+    class="search-form"
+    aria-labelledby="searchTitle"
+  >
+    <!-- Associando o título com o formulário -->
+    <h2 id="searchTitle" class="visually-hidden">
+      Formulário de busca de usuário
+    </h2>
+
+    <!-- Label visível para leitores de tela -->
+    <label for="username" class="visually-hidden">Usuário do GitHub</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="username"
+      placeholder="Ex: marcelofilipov"
+      required
+      class="input"
+      aria-required="true"
+      aria-label="Nome de usuário do GitHub"
+    />
+
+    <button
+      type="submit"
+      class="btn"
+      [disabled]="!searchForm.form.valid"
+      aria-label="Buscar usuário"
+    >
+      Buscar
+    </button>
+  </form>
+</main>
