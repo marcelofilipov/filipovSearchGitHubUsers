@@ -85,7 +85,7 @@
   >
     <h3 id="reposTitle">Repositórios</h3>
     <ul>
-      <li *ngFor="let repo of repos">
+      <li *ngFor="let repo of repos" data-cy="repo-item">
         <a
           [routerLink]="['/repo', username, repo.name]"
           [attr.aria-label]="'Detalhes do repositório ' + repo.name"

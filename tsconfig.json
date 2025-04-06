@@ -26,12 +26,19 @@
       "@models/*": [
         "src/app/core/models/*"
       ]
-    }
+    },
+    "types": [
+      "cypress"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": [
+    "src/**/**/*.ts",
+    "cypress/**/*.ts"
+  ]
 }
