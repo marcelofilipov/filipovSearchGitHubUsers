@@ -1,0 +1,110 @@
+<div class="container">
+  <!-- Carregando -->
+  <div *ngIf="loading" class="loading" role="status" aria-live="polite">
+    🔄 Carregando dados...
+  </div>
+
+  <!-- Erro -->
+  <div *ngIf="error" class="error" role="alert" aria-live="assertive">
+    {{ error }}
+  </div>
+
+  <!-- Botão de voltar -->
+  <div *ngIf="!loading && user && !error" class="back-button-wrapper">
+    <a routerLink="/" class="btn-back"> ⬅ Voltar para a busca </a>
+  </div>
+
+  <!-- Perfil do usuário -->
+  <div
+    class="user-profile"
+    *ngIf="user && !error"
+    aria-labelledby="userProfileTitle"
+  >
+    <img
+      [src]="user.avatar_url"
+      [attr.alt]="'Avatar de ' + (user.name || user.login)"
+      class="avatar"
+    />
+
+    <div class="user-info">
+      <h2 id="userProfileTitle">{{ user.name || user.login }}</h2>
+      <p class="username">@{{ user.login }}</p>
+
+      <div class="user-stats">
+        <span
+          >👥 <strong>{{ user.followers }}</strong> seguidores</span
+        >
+        <span
+          >🔁 <strong>{{ user.following }}</strong> seguindo</span
+        >
+        <span
+          >📦 <strong>{{ user.public_repos }}</strong> repositórios</span
+        >
+      </div>
+
+      <p *ngIf="user.location">📍 {{ user.location }}</p>
+      <p *ngIf="user.bio" class="bio">📝 {{ user.bio }}</p>
+    </div>
+  </div>
+
+  <!-- Ordenação -->
+  <div
+    class="sort-controls"
+    *ngIf="!loading && repos.length"
+    role="region"
+    aria-label="Opções de ordenação dos repositórios"
+  >
+    <label for="sortField">Ordenar por:</label>
+    <select
+      id="sortField"
+      [(ngModel)]="sortField"
+      (change)="sortRepos()"
+      aria-label="Campo de ordenação"
+    >
+      <option value="stars">Estrelas</option>
+      <option value="name">Nome</option>
+    </select>
+
+    <select
+      id="sortDirection"
+      [(ngModel)]="sortDirection"
+      (change)="sortRepos()"
+      aria-label="Direção de ordenação"
+    >
+      <option value="asc">Crescente</option>
+      <option value="desc">Decrescente</option>
+    </select>
+  </div>
+
+  <!-- Repositórios -->
+  <div
+    *ngIf="!loading && repos.length > 0"
+    class="repos"
+    role="region"
+    aria-labelledby="reposTitle"
+  >
+    <h3 id="reposTitle">Repositórios</h3>
+    <ul>
+      <li *ngFor="let repo of repos">
+        <a
+          [routerLink]="['/repo', username, repo.name]"
+          [attr.aria-label]="'Detalhes do repositório ' + repo.name"
+        >
+          {{ repo.name }}
+        </a>
+        <span aria-hidden="true">⭐ {{ repo.stargazers_count }}</span>
+        <p *ngIf="repo.description">{{ repo.description }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sem repositórios -->
+  <div
+    *ngIf="!loading && repos.length === 0 && user"
+    class="no-repos"
+    role="note"
+    aria-live="polite"
+  >
+    Este usuário não possui repositórios públicos.
+  </div>
+</div>
