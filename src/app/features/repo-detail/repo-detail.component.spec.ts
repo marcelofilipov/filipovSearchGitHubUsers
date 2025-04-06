@@ -5,6 +5,7 @@ import { of, throwError } from 'rxjs';
 import { GithubApiService } from 'src/app/core/services/github-api.service';
 import { Location } from '@angular/common';
 import { Repo } from 'src/app/core/models/repo.model';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RepoDetailComponent', () => {
   let component: RepoDetailComponent;
@@ -27,6 +28,7 @@ describe('RepoDetailComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [RepoDetailComponent],
+      imports: [RouterTestingModule],
       providers: [
         { provide: GithubApiService, useValue: githubServiceStub },
         {

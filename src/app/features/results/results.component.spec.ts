@@ -3,6 +3,8 @@ import { ResultsComponent } from './results.component';
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { GithubApiService } from 'src/app/core/services/github-api.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
 import { User } from '@models/user.model';
 import { Repo } from '@models/repo.model';
 
@@ -42,6 +44,7 @@ describe('ResultsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ResultsComponent],
+      imports: [FormsModule, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: GithubApiService, useValue: githubServiceStub },

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search.component';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -11,7 +12,7 @@ describe('SearchComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent],
-      imports: [FormsModule],
+      imports: [FormsModule, RouterTestingModule],
       providers: [
         {
           provide: Router,
